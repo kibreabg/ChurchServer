@@ -2,12 +2,14 @@
 using ChurchServer.Application.Services.Commands.DeleteService;
 using ChurchServer.Application.Services.Commands.UpdateService;
 using ChurchServer.Application.Services.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ChurchServer.Web.ApiControllers
 {
+    [Authorize]
     public class ServicesController : BaseApiController
     {
         [HttpGet]

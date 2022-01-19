@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ChurchServer.Application.Members.Queries
 {
-    public class GetMembersQuery : IRequest<List<MembersListDto>>
+    public class GetMembersQuery : IRequest<List<MemberGridDto>>
     {
     }
 
-    public class GetMembersQueryHandler : IRequestHandler<GetMembersQuery, List<MembersListDto>>
+    public class GetMembersQueryHandler : IRequestHandler<GetMembersQuery, List<MemberGridDto>>
     {
         private readonly IRepository _repository;
         private readonly IMapper _mapper;
@@ -23,10 +23,10 @@ namespace ChurchServer.Application.Members.Queries
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<List<MembersListDto>> Handle(GetMembersQuery request, CancellationToken cancellationToken)
+        public async Task<List<MemberGridDto>> Handle(GetMembersQuery request, CancellationToken cancellationToken)
         {
             var members = await _repository.ListAsync<Member>();
-            return _mapper.Map<List<MembersListDto>>(members);
+            return _mapper.Map<List<MemberGridDto>>(members);
         }
     }
 }

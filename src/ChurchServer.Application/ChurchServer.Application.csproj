@@ -18,8 +18,4 @@
     <ProjectReference Include="..\ChurchServer.Core\ChurchServer.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Members\Commands\" />
-  </ItemGroup>
-
 </Project>

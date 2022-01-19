@@ -1,9 +1,10 @@
-﻿using ChurchServer.SharedKernel;
+﻿using ChurchServer.Application.Common.Mappings;
+using ChurchServer.Core.Entities;
 using System;
 
-namespace ChurchServer.Core.Entities
+namespace ChurchServer.Application.Members.Queries
 {
-    public class Member : BaseEntity
+    public class MemberDto : IMapFrom<Member>
     {
         public string Title { get; set; }
         public string FirstName { get; set; }
@@ -47,7 +48,5 @@ namespace ChurchServer.Core.Entities
         public int EduSevenToTwelve { get; set; }
         public int EduCollage { get; set; }
         public int EduUniversity { get; set; }
-
-
     }
 }

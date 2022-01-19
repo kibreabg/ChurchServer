@@ -103,7 +103,7 @@
                 }),
                 Issuer = "Church Server",
                 Audience = "Church Angular App",
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddSeconds(10),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature)
             };
