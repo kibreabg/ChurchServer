@@ -6,7 +6,6 @@ using ChurchServer.SharedKernel;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using ChurchServer.Infrastructure.Identity;
 using ChurchServer.Core.Entities;
 
 namespace ChurchServer.Infrastructure.Data

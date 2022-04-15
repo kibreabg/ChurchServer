@@ -14,7 +14,7 @@ namespace ChurchServer.Application.Members.Commands.DeleteMember
 
     public class DeleteMemberCommandHandler : IRequestHandler<DeleteMemberCommand>
     {
-        public IRepository _repository { get; set; }
+        private readonly IRepository _repository;
 
         public DeleteMemberCommandHandler(IRepository repository)
         {

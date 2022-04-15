@@ -57,7 +57,7 @@ namespace ChurchServer.Application.Members.Commands.UpdateMember
 
     public class UpdateMemberCommandHandler : IRequestHandler<UpdateMemberCommand>
     {
-        public IRepository _repository { get; set; }
+        private readonly IRepository _repository;
 
         public UpdateMemberCommandHandler(IRepository repository)
         {

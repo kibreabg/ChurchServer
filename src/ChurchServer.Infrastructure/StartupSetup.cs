@@ -1,4 +1,5 @@
 ﻿using ChurchServer.Application.Common.Interfaces;
+using ChurchServer.Core.Entities;
 using ChurchServer.Core.Interfaces;
 using ChurchServer.Infrastructure.Data;
 using ChurchServer.Infrastructure.Identity;
@@ -80,6 +81,7 @@ namespace ChurchServer.Infrastructure
             => services
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<IRepository, EfRepository>()
+                .AddTransient<IUserRepository, UserRepository>()
                 .AddTransient<IEmailSender, EmailSender>();
 
 

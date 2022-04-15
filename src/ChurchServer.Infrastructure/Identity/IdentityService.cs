@@ -2,11 +2,13 @@
 {
     using ChurchServer.Application.Common.Interfaces;
     using ChurchServer.Application.Common.Models;
+    using ChurchServer.Core.Entities;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.IdentityModel.Tokens;
     using System;
+    using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Security.Claims;
@@ -34,17 +36,33 @@
 
             return user.UserName;
         }
-        public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
+        public async Task<User> GetUserByIdAsync(string userId)
+        {
+            return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        }
+        public async Task<List<User>> ListUsersAsync()
+        {
+            return await _userManager.Users.ToListAsync();
+        }
+        public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password, string email, string phoneNumber)
         {
             var user = new User
             {
                 UserName = userName,
+                PasswordHash = password,
                 Email = userName,
+                PhoneNumber = phoneNumber
             };
 
             var result = await _userManager.CreateAsync(user, password);
 
             return (result.ToApplicationResult(), user.Id);
+        }
+        public async Task<Result> UpdateUserAsync(User user)
+        {
+            var result = await _userManager.UpdateAsync(user);
+
+            return result.ToApplicationResult();
         }
         public async Task<(bool IsValid, string UserId, string UserName)> CheckPasswordAsync(string userName, string password)
         {
@@ -55,7 +73,7 @@
                 return (await _userManager.CheckPasswordAsync(user, password), user.Id, user.UserName);
             }
 
-            return (await Task.FromResult(false), user.Id, user.UserName);
+            return (await Task.FromResult(false), "", userName);
         }
         public async Task<bool> IsInRoleAsync(string userId, string role)
         {
