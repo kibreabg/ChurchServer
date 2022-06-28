@@ -1,8 +1,10 @@
 ﻿using Ardalis.ListStartupServices;
 using Autofac;
 using ChurchServer.Application;
+using ChurchServer.Application.Common.Interfaces;
 using ChurchServer.Core;
 using ChurchServer.Infrastructure;
+using ChurchServer.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +27,8 @@ namespace ChurchServer.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddSingleton<ICurrentUserService, CurrentUserService>()
+                .AddHttpContextAccessor()
                 .AddApplication()
                 .AddInfrastructureServices()
                 .AddDatabase(this.Configuration)

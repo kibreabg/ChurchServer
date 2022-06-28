@@ -10,7 +10,7 @@ using ChurchServer.Core.Entities;
 
 namespace ChurchServer.Infrastructure.Data
 {
-    public class ChurchDbContext : IdentityDbContext<User>
+    public class ChurchDbContext : IdentityDbContext<User, Role, string>
     {
         private readonly IMediator _mediator;
         public ChurchDbContext(DbContextOptions<ChurchDbContext> options, IMediator mediator)

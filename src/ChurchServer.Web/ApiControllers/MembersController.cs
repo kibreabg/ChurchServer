@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChurchServer.Web.ApiControllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class MembersController : BaseApiController
     {
         [HttpGet]

@@ -38,7 +38,7 @@ namespace ChurchServer.Infrastructure
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services
-                .AddIdentity<User, IdentityRole>(options =>
+                .AddIdentity<User, Role>(options =>
                 {
                     options.Password.RequiredLength = 6;
                     options.Password.RequireDigit = false;

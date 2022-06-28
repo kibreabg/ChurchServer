@@ -7,6 +7,7 @@ using ChurchServer.Application.Users.Queries;
 using ChurchServer.Core.Entities;
 using ChurchServer.Infrastructure.Identity;
 using ChurchServer.Web.ApiModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -27,12 +28,14 @@ namespace ChurchServer.Web.ApiControllers
             _identityService = identityService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<List<UserDto>>> GetUsers()
         {
             return await Mediator.Send(new GetUsersQuery());
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUser(string id)
         {
@@ -52,6 +55,8 @@ namespace ChurchServer.Web.ApiControllers
                 return BadRequest(result.Item1.Errors[0]);
             }
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(string id, UpdateUserCommand command)
         {
@@ -65,6 +70,7 @@ namespace ChurchServer.Web.ApiControllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Result>> Delete(string id)
         {
@@ -82,7 +88,7 @@ namespace ChurchServer.Web.ApiControllers
                 return Unauthorized();
             }
 
-            var token = _identityService.GenerateJwtToken(
+            var token = await _identityService.GenerateJwtToken(
                 checkPassResult.UserId,
                 checkPassResult.UserName,
                 _appSettings.Secret);
