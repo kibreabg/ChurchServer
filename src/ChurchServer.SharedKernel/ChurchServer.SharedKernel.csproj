@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Ardalis.Specification" Version="5.2.0" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
   </ItemGroup>
 
